@@ -4,7 +4,234 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89127f85-9103-4008-af59-ab1fc645d277" name="변경" comment="" />
+    <list default="true" id="a11c3fd6-5df4-4d83-85e8-6949636e1647" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/../auth/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/9.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/auth/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../auth/auth/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/AuthApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/address/api/AddressController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/address/dto/AddressDto$AddressDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/address/dto/AddressDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/address/entity/AddressEntity$AddressEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/address/entity/AddressEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/address/entity/QAddressEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/address/service/AddressServiceImpt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/dto/ResponseDto$ResponseDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/dto/ResponseDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/jwt/api/jwtRestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/jwt/base/JwtTokenBase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/jwt/dto/JwtToken$JwtTokenBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/jwt/dto/JwtToken.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/jwt/service/JwtRedisSerivceImpt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/kafka/service/KafkaLogProducerService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/redis/service/CacheRedisHashService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/redis/service/CacheRedisService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/common/utill/validation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/config/KafkaLogProducerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/config/QueryDslConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/config/RedisConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/api/RoleRestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/api/UserRestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/api/UserRoleRestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/config/UserSecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/converter/UserStatus$UserStatusConverter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/converter/UserStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/RoleDto$RoleDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/RoleDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/UserDto$UserData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/UserDto$UserDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/UserDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/UserRoleDto$UserRoleDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/UserRoleDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/UserTokenDto$UserTokenDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/dto/UserTokenDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/QRoleEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/QUserEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/QUserRoleEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/RoleEntity$RoleEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/RoleEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/UserDetail$UserDetailBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/UserDetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/UserEntity$UserEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/UserEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/UserRoleEntity$UserRoleEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/UserRoleEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/UserRoleEntityKey$UserRoleEntityKeyBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/entity/UserRoleEntityKey.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/jwt/filter/UserJwtTokenAuthenticationFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/jwt/provider/UserJwtTokenProvider.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/jwt/service/UserJwtTokenService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/redis/dto/RedisUserDto$RedisUserDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/redis/dto/RedisUserDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/redis/service/UserRedisSerivceImpt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/repository/RoleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/repository/UserRoleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/repository/UserSpecifications.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/service/RoleServiceImpt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/service/UserPrincipalDetailsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/service/UserRoleServiceImpt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/classes/java/main/com/msa/auth/user/service/UserServiceImpt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/reports/problems/problems-report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/resources/main/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/tmp/compileJava/compileTransaction/stash-dir/UserJwtTokenAuthenticationFilter.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/tmp/compileJava/compileTransaction/stash-dir/UserJwtTokenProvider.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/tmp/compileJava/compileTransaction/stash-dir/UserJwtTokenService.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/tmp/compileJava/compileTransaction/stash-dir/UserRestController.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/tmp/compileJava/compileTransaction/stash-dir/UserSecurityConfig.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/tmp/compileJava/compileTransaction/stash-dir/jwtRestController.class.uniqueId5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth/auth/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__ch_qos_logback_logback_classic_1_4_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__ch_qos_logback_logback_core_1_4_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_classmate_1_6_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_annotations_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_core_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_databind_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_dataformat_jackson_dataformat_yaml_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_module_jackson_module_parameter_names_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_googlecode_javaewah_JavaEWAH_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_codec_commons_codec_1_16_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_logging_commons_logging_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_micrometer_micrometer_commons_1_12_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_micrometer_micrometer_core_1_12_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_micrometer_micrometer_jakarta9_1_12_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_micrometer_micrometer_observation_1_12_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_micrometer_micrometer_registry_prometheus_1_12_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_prometheus_simpleclient_0_16_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_prometheus_simpleclient_common_0_16_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_prometheus_simpleclient_tracer_common_0_16_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_prometheus_simpleclient_tracer_otel_0_16_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_prometheus_simpleclient_tracer_otel_agent_0_16_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jakarta_annotation_jakarta_annotation_api_2_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jakarta_validation_jakarta_validation_api_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_i2p_crypto_eddsa_0_3_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_client5_httpclient5_5_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_core5_httpcore5_5_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_core5_httpcore5_h2_5_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpclient_4_5_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpcore_4_4_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_logging_log4j_log4j_api_2_21_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_logging_log4j_log4j_to_slf4j_2_21_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_sshd_sshd_osgi_2_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_sshd_sshd_sftp_2_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_core_10_1_33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_el_10_1_33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_websocket_10_1_33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bouncycastle_bcprov_jdk18on_1_78.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_eclipse_jgit_org_eclipse_jgit_6_6_1_202309021850_r.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_eclipse_jgit_org_eclipse_jgit_http_apache_6_6_1_202309021850_r.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_eclipse_jgit_org_eclipse_jgit_ssh_apache_6_6_1_202309021850_r.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hdrhistogram_HdrHistogram_2_1_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hibernate_validator_hibernate_validator_8_0_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jboss_logging_jboss_logging_3_5_3_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_latencyutils_LatencyUtils_2_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_projectlombok_lombok_1_18_36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_jcl_over_slf4j_2_0_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_jul_to_slf4j_2_0_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_2_0_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_actuator_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_actuator_autoconfigure_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_autoconfigure_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_actuator_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_json_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_logging_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_security_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_tomcat_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_validation_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_web_3_2_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_cloud_spring_cloud_commons_4_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_cloud_spring_cloud_config_client_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_cloud_spring_cloud_config_server_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_cloud_spring_cloud_context_4_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_security_spring_security_config_6_2_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_security_spring_security_core_6_2_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_security_spring_security_crypto_6_2_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_security_spring_security_rsa_1_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_security_spring_security_web_6_2_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_aop_6_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_beans_6_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_context_6_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_core_6_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_expression_6_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_jcl_6_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_web_6_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_webmvc_6_1_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_yaml_snakeyaml_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/com.msa.config.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/com.msa.config.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/com.msa.config.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/com.msa.config.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/9.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/9.5.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/9.5.1/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/9.5.1/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/9.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/9.5.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/9.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/9.5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/9.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/9.5.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/9.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/9.5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/9.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/9.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/config/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/.idea/modules/com.msa.gateway.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/9.5.1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/GatewayApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/filter/CustomFilter$Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/filter/CustomFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/filter/GlobalFilter$Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/filter/GlobalFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/jwt/base/JwtTokenValidBase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/jwt/dto/JwtToken$JwtTokenBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/jwt/dto/JwtToken.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/jwt/filter/JwtAuthenticationFilter$Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/jwt/filter/JwtAuthenticationFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/jwt/service/JwtRedisSerivceImpt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/jwt/service/JwtTokenValidService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/kafka/config/KafkaLogProducerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/kafka/service/KafkaLogProducerService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/redis/config/RedisConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/classes/java/main/com/msa/gateway/redis/service/CacheRedisService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/reports/problems/problems-report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/resources/main/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/tmp/compileJava/compileTransaction/stash-dir/JwtAuthenticationFilter$Config.class.uniqueId3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/tmp/compileJava/compileTransaction/stash-dir/JwtAuthenticationFilter.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/tmp/compileJava/compileTransaction/stash-dir/JwtRedisSerivceImpt.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/tmp/compileJava/compileTransaction/stash-dir/JwtTokenValidBase.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/tmp/compileJava/compileTransaction/stash-dir/JwtTokenValidService.class.uniqueId4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,12 +245,26 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/config">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="config" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="config" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="config" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -35,17 +276,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1,
-  &quot;fromUser&quot;: false
-}</component>
-  <component name="ProjectId" id="3GcJ7jBqKy0RKDugOR1wVaBqiYj" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="3GiWNiQYoFj49LgGUHgWbBh1Rzn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.config [compileJava].executor": "Run",
     "Gradle.config 빌드.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
@@ -56,18 +298,45 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "Spring Boot.ConfigApplication.executor": "Run",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/K8s-MSA/config",
+    "last_opened_file_path": "D:/SpringBoot-MSA/config",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "spring",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.ConfigApplication">
+    <configuration name="config [compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/config" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
     <configuration name="ConfigApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="com.msa.config.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.msa.config.ConfigApplication" />
@@ -75,6 +344,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.config [compileJava]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -86,18 +360,20 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="89127f85-9103-4008-af59-ab1fc645d277" name="변경" comment="" />
-      <created>1784264761552</created>
+      <changelist id="a11c3fd6-5df4-4d83-85e8-6949636e1647" name="변경" comment="" />
+      <created>1784454833008</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1784264761552</updated>
-      <workItem from="1784264762354" duration="6932000" />
-      <workItem from="1784337296629" duration="2802000" />
-      <workItem from="1784417950838" duration="737000" />
+      <updated>1784454833008</updated>
+      <workItem from="1784454834844" duration="3133000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
