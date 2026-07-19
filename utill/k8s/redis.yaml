@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+spec:
+  type: NodePort #외부접속 위해 사용
+  ports:
+  - port: 6379
+    nodePort: 30379
+  selector:
+    app: redis
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  serviceName: "redis-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis-container
+        image: redis:7.0
+        command: ["redis-server", "--appendonly", "yes", "--requirepass", "rootpassword"]
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi
