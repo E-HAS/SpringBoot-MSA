@@ -6,6 +6,11 @@ plugins {
 
 group = 'com.ehas'
 
+
+bootJar {
+	archiveFileName = 'auth-server.jar'
+}
+
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)

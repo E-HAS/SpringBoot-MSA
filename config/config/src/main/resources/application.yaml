@@ -1,19 +1,11 @@
 server:
   port: 8888
-  ssl:
-    enabled: true
-    trust-store: file:///C:/ssl127/truststore.jks
-    trust-store-password: QWas!@34
-    key-store: file:///C:/ssl127/server.p12
-    key-store-password: QWas!@34
-    key-store-type: PKCS12
-    key-alias: server-ssl-key
 
 spring:
-  application:
-    name: config-server
   profiles:
     active: native
+  application:
+    name: config-server
   security:
     basic:
       enabled: true

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: authservice
+  config:
+    import: optional:configserver:https://127.0.0.1:8888
+  cloud:
+    config:
+      username: root
+      password: rootpassword

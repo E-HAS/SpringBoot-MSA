@@ -6,6 +6,10 @@ plugins {
 
 group = 'com.msa'
 
+bootJar {
+	archiveFileName = 'config-server.jar'
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
