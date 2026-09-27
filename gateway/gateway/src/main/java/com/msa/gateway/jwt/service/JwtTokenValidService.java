@@ -5,7 +5,6 @@ import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
@@ -30,29 +29,16 @@ public class JwtTokenValidService extends JwtTokenValidBase {
         return super.validateTokenAndGetClaims(token);
     }
 
-    // AccessToken, RefreshToken 블랙리스트 존재 여부
-    public Mono<Boolean> existsBlacklist(String token) {
-        return jwtRedisSerivceImpt.existsBlacklistToken(token) // 블랙리스트 존재 여부
-                .flatMap(isBlacklisted -> {
-                    if (Boolean.TRUE.equals(isBlacklisted)) {
-                        return Mono.error(new Exception("Token is blacklisted"));
+    // AccessToken 토큰, 블랙리스트 검사
+    public Mono<Boolean> validateAccessToken(String token) {
+            return validateTokenAndGetClaims(token)
+                .flatMap(claims -> jwtRedisSerivceImpt.existsBlacklistToken(token))
+                .flatMap(blacklisted -> {
+                    if (Boolean.TRUE.equals(blacklisted)) {
+                        return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token is blacklisted"));
                     }
+
                     return Mono.just(true);
-                });
-    }
-    // RefreshToken 유효성 검사
-    public Mono<Boolean> validateRefreshToken(String refreshToken) {
-        return jwtRedisSerivceImpt.existsRefreshToken(refreshToken) // RefreshToken 존재 여부
-                .flatMap(exists -> {
-                    if (!Boolean.TRUE.equals(exists)) {
-                        return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Refresh token expired or invalid"));
-                    }
-                    try {
-                        validateTokenAndGetClaims(refreshToken); // RefreshToken 유효성검사
-                        return Mono.just(true);
-                    } catch (Exception e) {
-                        return Mono.error(new Exception("Invalid refresh token: " + e.getMessage()));
-                    }
                 });
     }
 }

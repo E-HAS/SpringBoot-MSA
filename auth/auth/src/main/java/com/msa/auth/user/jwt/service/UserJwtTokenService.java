@@ -1,7 +1,5 @@
 package com.msa.auth.user.jwt.service;
 
-import com.msa.auth.common.jwt.base.JwtTokenBase;
-import com.msa.auth.common.jwt.service.JwtRedisSerivceImpt;
 import com.msa.auth.common.jwt.dto.JwtToken;
 import com.msa.auth.user.jwt.provider.UserJwtTokenProvider;
 import io.jsonwebtoken.Claims;
@@ -12,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -72,5 +69,12 @@ public class UserJwtTokenService{
     // token 블랙리스트 존재여부
     public Boolean existsBlacklist(String token) throws Exception {
     	return userJwtTokenProvider.existsBlacklist(token);
+    }
+
+    public long getAccessTokenexpirationTime(){
+        return userJwtTokenProvider.getAccessTokenexpirationTime();
+    }
+    public long getRefreshTokenexpirationTime() {
+        return userJwtTokenProvider.getRefreshTokenexpirationTime();
     }
 }

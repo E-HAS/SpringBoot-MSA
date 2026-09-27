@@ -15,7 +15,10 @@ import java.util.Date;
 
 @Slf4j
 public class JwtTokenBase {
-    public final String HEADER_PREFIX = "Bearer ";
+    public static final String HEADER_PREFIX = "Bearer ";
+    public static final String PREFIX_REFRESH_TOKEN = "refreshToken:";
+    public static final String PREFIX_BLACKLIST_TOKEN = "blacklistToken:";
+
     protected final String PERMISSIONS_KEY = "permissions";
     protected final String TOKEN_ID_KEY = "tokenId";
 

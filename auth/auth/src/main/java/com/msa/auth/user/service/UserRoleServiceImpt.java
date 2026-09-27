@@ -43,7 +43,7 @@ public class UserRoleServiceImpt {
     @Transactional(rollbackFor = { Exception.class })
     public Boolean deleteRoleByUserIdAndRoleSeq(String userId, Integer roleSeq){
         try {
-            userRoleRepository.findByUserIdAndRoleSeq(userId, roleSeq);
+            userRoleRepository.deleteByUserIdAndRoleSeq(userId, roleSeq);
             return true;
         }catch(Exception e) {
             return false;

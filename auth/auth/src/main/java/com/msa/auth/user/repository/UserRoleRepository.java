@@ -27,5 +27,5 @@ public interface UserRoleRepository extends JpaRepository<UserRoleEntity, UserRo
 							   WHERE id = :userId)
 			  AND role_seq = :roleSeq
 			""", nativeQuery = true)
-    int findByUserIdAndRoleSeq(String userId, Integer roleSeq);
+    int deleteByUserIdAndRoleSeq(String userId, Integer roleSeq);
 }

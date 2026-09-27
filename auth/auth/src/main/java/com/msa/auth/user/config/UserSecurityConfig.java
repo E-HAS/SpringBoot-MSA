@@ -2,7 +2,6 @@ package com.msa.auth.user.config;
 
 import java.util.List;
 
-import com.msa.auth.user.jwt.filter.UserJwtTokenAuthenticationFilter;
 import com.msa.auth.user.jwt.provider.UserJwtTokenProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,11 +33,10 @@ public class UserSecurityConfig {
             , UserJwtTokenProvider userJwtTokenProvider
             , @Qualifier("UserAuthenticationProvider") DaoAuthenticationProvider authenticationProvider) throws Exception {
 
-        AuthenticationManager authenticationManager = new ProviderManager(authenticationProvider);
-
+        //AuthenticationManager authenticationManager = new ProviderManager(authenticationProvider);
         return http.securityMatcher(
                         new AntPathRequestMatcher("/users/**"))
-                .authenticationManager(authenticationManager)
+                .authenticationManager(new ProviderManager(authenticationProvider))
                 .csrf(csrf -> csrf.disable())
                 .formLogin(login -> login.disable())
                 .httpBasic(basic -> basic.disable())
@@ -50,8 +46,6 @@ public class UserSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(HttpMethod.POST, "/users", "/users/*").permitAll()
                                 .anyRequest().authenticated())
-                .addFilterBefore(new UserJwtTokenAuthenticationFilter(userJwtTokenProvider),
-                        UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 

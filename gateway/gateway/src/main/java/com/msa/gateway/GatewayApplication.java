@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
 
 @SpringBootApplication
 @EnableWebFluxSecurity
@@ -19,6 +20,11 @@ public class GatewayApplication {
 	public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity security) {
 		return security
 				.csrf(ServerHttpSecurity.CsrfSpec::disable)
+				.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+				.formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+				.logout(ServerHttpSecurity.LogoutSpec::disable)
+				.requestCache(ServerHttpSecurity.RequestCacheSpec::disable)
+				.securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
 				.authorizeExchange(exchanges -> exchanges
 						.anyExchange().permitAll()
 				)

@@ -5,18 +5,30 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpCookie;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.server.ServerWebExchange;
+
+import com.msa.gateway.jwt.base.JwtTokenValidBase;
+
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Component
 @Slf4j
 public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Config> {
 
-    public GlobalFilter(){
+    private static final String REQUEST_ID_HEADER = "X-Request-Id";
+
+    // 로그에 원문을 남기면 안 되는 민감 헤더/쿠키 목록
+    private static final List<String> SENSITIVE_HEADERS = List.of("authorization", "cookie", "set-cookie");
+
+    public GlobalFilter() {
         super(Config.class);
     }
 
@@ -24,22 +36,31 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
-            ServerHttpResponse response = exchange.getResponse();
             String id = request.getId();
 
-            log.info("Global Filter baseMessage : {}", config.getBaseMessage());
+            // 다운스트림 서비스(authservice 등)까지 동일한 requestId를 전파
+            // -> 게이트웨이~서비스 로그를 하나의 id로 grep해서 추적 가능
+            ServerHttpRequest mutatedRequest = request.mutate()
+                    .header(REQUEST_ID_HEADER, id)
+                    .build();
+            ServerWebExchange mutatedExchange = exchange.mutate().request(mutatedRequest).build();
+            ServerHttpResponse response = mutatedExchange.getResponse();
 
-            if (!config.isPreLogger()) {
-                return chain.filter(exchange)
-                		.then(Mono.fromRunnable(() -> { 
-               			 if (config.isPostLogger()) isPostLogger(response, id);
-                       }));
+            log.info("[Filter-{}] baseMessage : {}", id, config.getBaseMessage());
+
+            if (config.isPreLogger()) {
+                logRequest(mutatedRequest, id);
             }
 
-            isPreLogger(request, id);
-            return chain.filter(exchange)
-            		.then(Mono.fromRunnable(() -> { 
-            			 if (config.isPostLogger()) isPostLogger(response, id);
+            long startTime = System.currentTimeMillis();
+
+            return chain.filter(mutatedExchange)
+                    .doOnError(e -> log.error("[Request-{}] Filter chain error: {}", id, e.getMessage(), e))
+                    .then(Mono.fromRunnable(() -> {
+                        if (config.isPostLogger()) {
+                            long duration = System.currentTimeMillis() - startTime;
+                            logResponse(response, id, duration);
+                        }
                     }));
         };
     }
@@ -51,32 +72,54 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
         private boolean postLogger;
     }
 
-    private void isPreLogger(ServerHttpRequest request, String id) {
+    private void logRequest(ServerHttpRequest request, String id) {
         String clientIp = String.valueOf(request.getRemoteAddress());
         String uri = request.getURI().toString();
         String method = String.valueOf(request.getMethod());
-        String header = request.getHeaders().toString();
 
         log.info("[Request-{}] {} >> [{}] {}", id, clientIp, method, uri);
-        log.info("[Request-{}] Headers: {}", id, header);
 
-        MultiValueMap<String, HttpCookie> cookies = request.getCookies();
-        HttpCookie httpCookie = cookies.getFirst("refreshToken");
-        if (httpCookie != null) {
-            log.info("[Request-{}] refreshToken: {}", id, httpCookie.getValue());
-        }
+        logHeaders(id, request.getHeaders(), request.getCookies());
     }
 
-    private void isPostLogger(ServerHttpResponse response, String id) {
-        String header = response.getHeaders().toString();
+    private void logResponse(ServerHttpResponse response, String id, long durationMs) {
         String status = String.valueOf(response.getStatusCode());
 
-        log.info("[Response-{}] {} {}", id, status, header);
+        boolean isError = status.startsWith("4") || status.startsWith("5");
+        if (isError) {
+            log.error("[Response-{}] {} ({}ms)", id, status, durationMs);
+        } else {
+            log.info("[Response-{}] {} ({}ms)", id, status, durationMs);
+        }
 
-        MultiValueMap<String, ResponseCookie> cookies = response.getCookies();
-        ResponseCookie cookie = cookies.getFirst("refreshToken");
+        logHeaders(id, response.getHeaders(), response.getCookies());
+    }
+
+    private void logHeaders(String id, HttpHeaders headers, MultiValueMap<String, ? extends HttpCookie> cookies) {
+        if (log.isDebugEnabled()) {
+            // Authorization/Cookie 헤더 추출
+            log.debug("[Response-{}] Headers: {}", id, getHeaders(headers));
+        }
+
+        // refreshtoken 추출
+        HttpCookie cookie = cookies.getFirst(JwtTokenValidBase.REFRESH_COOKIE_NAME);
         if (cookie != null) {
             log.info("[Response-{}] refreshToken: {}", id, cookie.getValue());
         }
+    }
+
+    // Authorization/Cookie 헤더 추출
+    private String getHeaders(HttpHeaders headers) {
+        StringBuilder sb = new StringBuilder("{");
+        headers.forEach((key, values) -> {
+            boolean find = SENSITIVE_HEADERS.contains(key.toLowerCase());
+            if(find){
+                sb.append(key).append("=");
+                sb.append(values);
+                sb.append(", ");
+            }
+        });
+        sb.append("}");
+        return sb.toString();
     }
 }

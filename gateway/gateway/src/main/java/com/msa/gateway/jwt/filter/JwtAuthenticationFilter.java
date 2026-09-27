@@ -1,6 +1,5 @@
 package com.msa.gateway.jwt.filter;
 
-import com.msa.gateway.jwt.base.JwtTokenValidBase;
 import com.msa.gateway.jwt.service.JwtTokenValidService;
 import io.jsonwebtoken.Claims;
 import lombok.Data;
@@ -48,20 +47,11 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
             return jwtTokenValidService.resolveAccessToken(request)
                     .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No Authorization header or Invalid format")))
                     .flatMap(jwt ->
-                            // AccessToken 블랙리스트 조회
-                            jwtTokenValidService.existsBlacklist(jwt)
-                                    // 토큰 유효성 검사
-                                    .then(jwtTokenValidService.validateTokenAndGetClaims(jwt))
-                                    .onErrorMap(e -> new Exception("Invalid or Expired Access token: " + e.getMessage(), e))
+                            jwtTokenValidService.validateAccessToken(jwt) // AccessToken 블랙리스트 조회
+                                    .then(jwtTokenValidService.validateTokenAndGetClaims(jwt)) // 토큰 추출
+                                    .onErrorMap(e -> new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Invalid or Expired Access token: " + e.getMessage(),e))
                     )
                     .map(Claims::getSubject)
-                    // RefreshToken 유효성 검사
-                    .flatMap(userId ->
-                            // 쿠키에서 RefreshToken 추출
-                            jwtTokenValidService.extractRefreshToken(request) // 쿠키에서 RefreshToken 추출
-                                    .flatMap(jwtTokenValidService::validateRefreshToken) // 유효성 및 Redis 존재 검사
-                                    .thenReturn(userId)
-                    )
                     // 헤더 추가
                     .flatMap(userId -> {
                         ServerHttpRequest modifiedRequest = request.mutate()

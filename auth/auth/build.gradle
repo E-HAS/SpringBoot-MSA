@@ -92,6 +92,26 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// QueryDSL Q 클래스 생성 설정
+def querydslDir = layout.buildDirectory.dir("generated/querydsl")
+
+tasks.withType(JavaCompile).configureEach {
+    options.generatedSourceOutputDirectory.set(querydslDir)
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir(querydslDir)
+        }
+    }
+}
+
+// clean 시 QueryDSL 생성 파일도 함께 삭제
+tasks.named('clean') {
+    delete(querydslDir)
+}
+/*
 // QueryDSL Q 클래스 생성 디렉토리 설정
 def generated = 'src/main/generated'
 
@@ -108,3 +128,4 @@ sourceSets {
 clean {
 	delete file(generated)
 }
+*/

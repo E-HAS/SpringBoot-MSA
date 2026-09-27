@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -136,12 +135,14 @@ public class UserJwtTokenProvider extends JwtTokenBase {
     }
     // Authentication -> RefreshToken 생성
     public JwtToken createRefreshToken(Authentication authentication) {
+        UserDetail userDetail = (UserDetail) authentication.getPrincipal();
+
         String refresTokenId = UUID.randomUUID().toString();
-        String username = authentication.getName();
 
         Claims claims = Jwts.claims()
-                .subject(username)
+                .subject(userDetail.getId())
                 .add(TOKEN_ID_KEY, refresTokenId)
+                .add("name", userDetail.getName())
                 .build();
 
         Date now = new Date();
@@ -219,7 +220,7 @@ public class UserJwtTokenProvider extends JwtTokenBase {
 
     // redis <- refreshToken 저장
     public Boolean addRefreshToken(String token){
-        return jwtRedisSerivceImpt.addRefreshToken(token);
+        return jwtRedisSerivceImpt.addRefreshToken(token, getRefreshTokenexpirationTime());
     }
     // token 블랙리스트 저장
     public Boolean addBlacklistToken(String token, long remain){
