@@ -44,7 +44,7 @@ public class UserSecurityConfig {
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                         .accessDeniedHandler((req, res, e) -> res.sendError(HttpStatus.FORBIDDEN.value())))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers(HttpMethod.POST, "/users", "/users/*").permitAll()
+                        auth.requestMatchers(HttpMethod.POST, "/login/*","/logout/*","/jwt/reissue","/users", "/users/*").permitAll()
                                 .anyRequest().authenticated())
                 .build();
     }

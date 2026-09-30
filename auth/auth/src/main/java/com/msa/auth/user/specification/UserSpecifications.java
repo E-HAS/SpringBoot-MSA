@@ -1,4 +1,4 @@
-package com.msa.auth.user.repository;
+package com.msa.auth.user.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 

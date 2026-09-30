@@ -1,5 +1,7 @@
 package com.msa.auth.user.service;
 
+import com.msa.auth.common.exception.code.BusinessExceptionErrorCode;
+import com.msa.auth.common.exception.error.BusinessException;
 import com.msa.auth.common.utill.validation;
 import com.msa.auth.user.converter.UserStatus;
 import com.msa.auth.user.dto.UserDto;
@@ -9,7 +11,8 @@ import com.msa.auth.user.entity.UserRoleEntity;
 import com.msa.auth.user.redis.dto.RedisUserDto;
 import com.msa.auth.user.redis.service.UserRedisSerivceImpt;
 import com.msa.auth.user.repository.UserRepository;
-import com.msa.auth.user.repository.UserSpecifications;
+import com.msa.auth.user.specification.UserSpecifications;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -29,26 +32,26 @@ public class UserServiceImpt {
     private final UserRedisSerivceImpt userRedisSerivceImpt;
 
     @Transactional(rollbackFor = { Exception.class })
-    public Boolean add(UserDto user) throws Exception{
+    public Boolean add(UserDto user){
         try {
             UserEntity userEntity = userRepository.save(UserEntity.builder()
-                    .id(user.getId())
-                    .password(user.getPassword())
-                    .name(user.getName())
-                    .addressSeq(user.getAddressSeq())
-                    .status(UserStatus.ACTIVE)
-                    .registeredDate(LocalDateTime.now())
-                    .build());
+                                                                    .id(user.getId())
+                                                                    .password(user.getPassword())
+                                                                    .name(user.getName())
+                                                                    .addressSeq(user.getAddressSeq())
+                                                                    .status(UserStatus.ACTIVE)
+                                                                    .registeredDate(LocalDateTime.now())
+                                                                    .build());
 
             UserRoleEntity roleEntity = userRoleServiceImpt.add(UserRoleDto.builder()
-                    .userSeq(userEntity.getSeq())
-                    .roleSeq(user.getRoleSeq())
-                    .build());
+                                                                            .userSeq(userEntity.getSeq())
+                                                                            .roleSeq(user.getRoleSeq())
+                                                                            .build());
 
             return true;
         }catch(Exception e) {
             log.error("[Fail] User Add Error : "+e.getMessage());
-            throw new Exception("User Add Failed");
+            throw new BusinessException(BusinessExceptionErrorCode.BAD_REQUEST,"User Add Failed");
         }
     }
 
@@ -72,33 +75,37 @@ public class UserServiceImpt {
             }
             findUserEntity.setUpdatedDate(LocalDateTime.now());
 
-            return this.updateBySeq(findUserEntity)? true:false;
+            return this.updateBySeq(findUserEntity);
         }catch(Exception e) {
             log.error("[Fail] User Update Failed Error : "+e.getMessage());
-            return false;
+            throw new BusinessException(BusinessExceptionErrorCode.BAD_REQUEST,"User Update Failed ");
         }
     }
 
     @Transactional(rollbackFor = { Exception.class })
     public Boolean updateBySeq(UserEntity entity){
-        Boolean result = userRepository.updateBySeq(entity.getSeq()
-                ,entity.getName()
-                ,entity.getPassword()
-                ,entity.getStatus()
-                ,entity.getAddressSeq()
-                ,entity.getPasswordUpdatedDate()
-                ,entity.getUpdatedDate()
-                ,entity.getDeletedDate())
-                == 1 ? true : false;
+        int dbResult = userRepository.updateBySeq(entity.getSeq()
+                                                    ,entity.getName()
+                                                    ,entity.getPassword()
+                                                    ,entity.getStatus()
+                                                    ,entity.getAddressSeq()
+                                                    ,entity.getPasswordUpdatedDate()
+                                                    ,entity.getUpdatedDate()
+                                                    ,entity.getDeletedDate());
+        
+        if(dbResult == 0){
+            log.error("[Fail] User Update Failed Error in DB ");
+            throw new BusinessException(BusinessExceptionErrorCode.BAD_REQUEST,"User Update Failed ");
+        }
 
-        userRedisSerivceImpt.save(entity.getId(), RedisUserDto.builder()
-                .userSeq(entity.getSeq())
-                .addressSeq(entity.getAddressSeq())
-                .name(entity.getName())
-                .Status(entity.getStatus().getInteger())
-                .build());
+        Boolean redisResult = userRedisSerivceImpt.save(entity.getId(), entity.convertRedisUserDto(entity.getId()));
 
-        return result;
+        if(!redisResult){
+            log.error("[Fail] User Update Failed Error in Redis ");
+            throw new BusinessException(BusinessExceptionErrorCode.BAD_REQUEST,"User Update Failed ");
+        }
+
+        return true;
     }
 
     @Transactional(rollbackFor = { Exception.class })
@@ -109,10 +116,10 @@ public class UserServiceImpt {
 
             findUserEntity.setStatus(UserStatus.INACTIVE);
             findUserEntity.setDeletedDate(LocalDateTime.now());
-            return this.updateBySeq(findUserEntity) ? true : false;
+            return this.updateBySeq(findUserEntity);
         }catch(Exception e) {
             log.error("[Fail] User Delete Error : "+e.getMessage());
-            return false;
+            throw new BusinessException(BusinessExceptionErrorCode.BAD_REQUEST,"User Delete Error ");
         }
     }
 
@@ -126,8 +133,13 @@ public class UserServiceImpt {
 
         Specification<UserEntity> spec = UserSpecifications.findWith(status, seq, id, name, stDt, enDt);
 
-        return userRepository.findAll(spec,pageable)
-                .map(UserEntity::convertToUserDto);
+         Page<UserDto> lists = userRepository.findAll(spec,pageable).map(UserEntity::convertToUserDto);                                            
+        
+        if (lists.isEmpty()) {
+            throw new BusinessException(BusinessExceptionErrorCode.NOT_FOUND,"Users not found.");
+        }
+
+        return lists;
     }
 
     public UserEntity findByUserSeq(Integer seq){
@@ -136,17 +148,18 @@ public class UserServiceImpt {
 
     public UserEntity findByUserId(String id){
         UserEntity entity = userRepository.findByUserId(id);
+        if(entity == null){
+            throw new BusinessException(BusinessExceptionErrorCode.NOT_FOUND,"User not found.");
+        }
 
         if(!userRedisSerivceImpt.exists(id)) {
-            userRedisSerivceImpt.save(id, RedisUserDto.builder()
-                    .userSeq(entity.getSeq())
-                    .addressSeq(entity.getAddressSeq())
-                    .name(entity.getName())
-                    .Status(entity.getStatus().getInteger())
-                    .roles(entity.getRoles().stream().map(v->v.getRole().getRoleName()).toList())
-                    .build());
+            userRedisSerivceImpt.save(id, entity.convertRedisUserDto(id));
         }
 
         return entity;
+    }
+
+    public UserDto findByUserIdInRedis(String id){
+        return userRedisSerivceImpt.findByUserId(id).convertUserDto(id);
     }
 }

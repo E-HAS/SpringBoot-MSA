@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.msa.auth.user.converter.UserStatus;
 import com.msa.auth.user.dto.UserDto;
+import com.msa.auth.user.redis.dto.RedisUserDto;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -74,5 +76,16 @@ public class UserEntity{
                 .addressSeq(this.addressSeq)
                 .roles(roleNames)
                 .build();
+    }
+
+    public RedisUserDto convertRedisUserDto(String id) {
+
+    	return RedisUserDto.builder()
+                            .userSeq(this.getSeq())
+                            .addressSeq(this.getAddressSeq())
+                            .roles(this.getRoles().stream().map(v->v.getRole().getRoleName()).toList())
+                            .id(id)
+                            .name(this.getName())
+                            .build();
     }
 }

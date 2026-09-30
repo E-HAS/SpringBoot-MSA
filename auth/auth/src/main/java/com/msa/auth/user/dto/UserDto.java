@@ -1,6 +1,8 @@
 package com.msa.auth.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.msa.auth.user.redis.dto.RedisUserDto;
+
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,5 +35,17 @@ public class UserDto {
         String getSeq();
         String getName();
         String getAddressSeq();
+    }
+
+    public RedisUserDto convertRedisUserDto(String id) {
+    	return RedisUserDto.builder()
+                            .userSeq(this.getSeq())
+                            .addressSeq(this.getAddressSeq())
+                            .roleSeq(this.getRoleSeq())
+                            .roles(this.getRoles())
+                            .id(id)
+                            .name(this.getName())
+                            .Status(this.getStatus())
+                            .build();
     }
 }

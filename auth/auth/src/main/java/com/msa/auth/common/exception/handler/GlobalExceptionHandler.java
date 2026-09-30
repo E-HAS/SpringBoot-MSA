@@ -1,6 +1,8 @@
-package com.msa.auth.handler;
+package com.msa.auth.common.exception.handler;
 
 import com.msa.auth.common.dto.ErrorResponseDto;
+import com.msa.auth.common.exception.error.BusinessException;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,31 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponseDto> handleAllIllegalArgumentException(Exception e) {
+        String errorDetail = extractErrorDetail(e);
+        log.error("[handleAllIllegalArgumentException]", e);
+        log.error(errorDetail, e);
+
+        ErrorResponseDto response = new ErrorResponseDto(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Internal Server Error",
+                e.getMessage()
+        );
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<String> handleBusinessException(BusinessException e) {
+        String errorDetail = extractErrorDetail(e);
+        log.error("[handleBusinessException]", e);
+        log.error(errorDetail, e);
+
+        return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
+    }
+    
     private String extractErrorDetail(Exception e) {
         if (e.getStackTrace() != null && e.getStackTrace().length > 0) {
             StackTraceElement element = e.getStackTrace()[0];

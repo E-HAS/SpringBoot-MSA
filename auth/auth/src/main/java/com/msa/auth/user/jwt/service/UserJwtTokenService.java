@@ -29,10 +29,10 @@ public class UserJwtTokenService{
     	JwtToken accessToken = userJwtTokenProvider.createAccessToken(authentication);
     	JwtToken refreshToken = userJwtTokenProvider.createRefreshToken(authentication);
     	
-    	Boolean created = userJwtTokenProvider.addRefreshToken( refreshToken.getRefreshToken());
+    	Boolean created = userJwtTokenProvider.addRefreshTokenInRedis( refreshToken.getRefreshToken());
 
     	if(!created) {
-    		new RuntimeException("Failed to store tokens in Redis");
+    		throw new IllegalStateException("Failed to store tokens in Redis");
     	}
     	
     	return JwtToken.builder()
@@ -42,8 +42,11 @@ public class UserJwtTokenService{
 	    			.build();
     }
 
+    public String extractRefreshToken(HttpServletRequest request){
+        return userJwtTokenProvider.extractRefreshToken(request);
+    }
     // RefreshToken 유효성 검사
-    public void validdateRefreshToken(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public void validdateRefreshToken(HttpServletRequest request, HttpServletResponse response){
         userJwtTokenProvider.validdateRefreshToken(request, response);
     }
     // AccessToken 재생성
@@ -61,14 +64,14 @@ public class UserJwtTokenService{
         long remainExpiration = expiration.getTime() - now;
         
         if(remainExpiration>0) {
-        	return userJwtTokenProvider.addBlacklistToken(token, remainExpiration);
+        	return userJwtTokenProvider.addBlacklistTokenInRedis(token, remainExpiration);
         }
         return true;
     }
     
     // token 블랙리스트 존재여부
     public Boolean existsBlacklist(String token) throws Exception {
-    	return userJwtTokenProvider.existsBlacklist(token);
+    	return userJwtTokenProvider.existsBlacklistInRedis(token);
     }
 
     public long getAccessTokenexpirationTime(){

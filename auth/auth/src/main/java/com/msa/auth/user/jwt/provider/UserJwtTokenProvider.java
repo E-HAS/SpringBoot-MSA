@@ -43,7 +43,7 @@ public class UserJwtTokenProvider extends JwtTokenBase {
 
     // 토큰 유효성 검사
     @Override
-    public boolean validateToken(String token) throws Exception {
+    public boolean validateToken(String token){
     	return super.validateToken(token);
     }
 
@@ -95,7 +95,7 @@ public class UserJwtTokenProvider extends JwtTokenBase {
         Date expiryDate = new Date(now.getTime() + this.getAccessTokenexpirationTime());
         Claims payload = this.getPayloadToken(token);
         if(payload == null) {
-            new Exception("Failed Extend AccessToken");
+            new IllegalArgumentException("Failed Extend AccessToken");
         }
         return this.createTokenByPayload(payload, now, expiryDate);
     }
@@ -163,11 +163,11 @@ public class UserJwtTokenProvider extends JwtTokenBase {
     }
 
     // 쿠키에서 RefreshToken 추출
-    public String extractRefreshToken(HttpServletRequest request) throws Exception{
+    public String extractRefreshToken(HttpServletRequest request){
         // 1. 쿠키에서 refreshToken 가져오기
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
-            throw new Exception("Refresh token not found in cookies.");
+            throw new IllegalStateException("Refresh token not found in cookies.");
         }
 
         String refreshToken = null;
@@ -179,14 +179,14 @@ public class UserJwtTokenProvider extends JwtTokenBase {
         }
 
         if (refreshToken == null) {
-            throw new Exception("Refresh token not found in cookies.");
+            throw new IllegalStateException("Refresh token not found in cookies.");
         }
 
         return refreshToken;
     }
 
     // RefreshToken 유효성검사
-    public void validdateRefreshToken(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void validdateRefreshToken(HttpServletRequest request, HttpServletResponse response){
         // RefreshToken 추출
         String refreshToken = this.extractRefreshToken( request);
 
@@ -219,20 +219,20 @@ public class UserJwtTokenProvider extends JwtTokenBase {
     }
 
     // redis <- refreshToken 저장
-    public Boolean addRefreshToken(String token){
+    public Boolean addRefreshTokenInRedis(String token){
         return jwtRedisSerivceImpt.addRefreshToken(token, getRefreshTokenexpirationTime());
     }
     // token 블랙리스트 저장
-    public Boolean addBlacklistToken(String token, long remain){
+    public Boolean addBlacklistTokenInRedis(String token, long remain){
         return jwtRedisSerivceImpt.addBlacklistToken(token,remain);
     }
     // token 블랙리스트 존재여부
-    public Boolean existsBlacklist(String token) throws Exception {
+    public Boolean existsBlacklistInRedis(String token) throws Exception {
         try {
             return jwtRedisSerivceImpt.existsBlacklistToken(token);
         }catch (Exception e) {
             log.error("[existsBlacklist] Invalid JWT token");
-            throw new Exception("Invalid JWT token");
+            throw new IllegalArgumentException("Invalid JWT token");
         }
     }
 

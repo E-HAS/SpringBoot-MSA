@@ -2,6 +2,8 @@ package com.msa.auth.user.redis.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.msa.auth.common.exception.code.BusinessExceptionErrorCode;
+import com.msa.auth.common.exception.error.BusinessException;
 import com.msa.auth.common.redis.service.CacheRedisService;
 import com.msa.auth.user.dto.UserDto;
 import com.msa.auth.user.redis.dto.RedisUserDto;
@@ -46,22 +48,17 @@ public class UserRedisSerivceImpt {
     }
     
     public RedisUserDto findByUserId(String id) {
-    	Boolean exists =  this.exists(id); // 또는 this.exists(prefixUser + id)
+    	Boolean exists =  this.exists(id); // redis id 존재 여부
     	
-        if (Boolean.FALSE.equals(exists)) {
+        if (Boolean.FALSE.equals(exists)) { // redis id 없을시 생성
         	UserDto userDto = userRepository.getUserById(id);
-        	RedisUserDto redisUserDto = RedisUserDto.builder()
-								                    .userSeq(userDto.getSeq())
-								                    .addressSeq(userDto.getAddressSeq())
-								                    .name(userDto.getName())
-								                    .Status(userDto.getStatus())
-								                    .build();
+        	RedisUserDto redisUserDto = userDto.convertRedisUserDto(id);
         	
         	Boolean result = this.save(id, redisUserDto);
             if (result) {
                 return redisUserDto;
             } else {
-                throw new RuntimeException("Failed to save to Redis");
+                throw new BusinessException(BusinessExceptionErrorCode.BAD_GATEWAY,"Failed to save to Redis");
             }
         }
         

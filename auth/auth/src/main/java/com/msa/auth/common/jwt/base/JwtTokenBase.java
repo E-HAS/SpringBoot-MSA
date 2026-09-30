@@ -49,25 +49,25 @@ public class JwtTokenBase {
     }
 
     // 토큰 유효성 검사
-    public boolean validateToken(String token) throws Exception {
+    public boolean validateToken(String token){
         try {
             Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token);
             return true;
         } catch (SignatureException e) {
             log.error("[validateToken] Invalid JWT signature: {}", e.getMessage());
-            throw new Exception("Invalid JWT signature: " + e.getMessage());
+            throw new IllegalStateException("Invalid JWT signature");
         } catch (ExpiredJwtException e) {
             log.error("[validateToken] JWT token is expired: {}", e.getMessage());
-            throw e;
+            throw new IllegalStateException(" JWT token is expired");
         } catch (UnsupportedJwtException e) {
             log.error("[validateToken] JWT token is unsupported: {}", e.getMessage());
-            throw new Exception("JWT token is unsupported: " + e.getMessage());
+            throw new IllegalStateException("JWT token is unsupported");
         } catch (IllegalArgumentException e) {
             log.error("[validateToken] JWT claims string is empty: {}", e.getMessage());
-            throw new Exception("JWT claims string is empty: " + e.getMessage());
+            throw new IllegalStateException("JWT claims string is empty");
         } catch (JwtException e) {
             log.error("[validateToken] Invalid JWT token: {}", e.getMessage());
-            throw new Exception("Invalid JWT token: " + e.getMessage());
+            throw new IllegalStateException("Invalid JWT token");
         }
     }
 

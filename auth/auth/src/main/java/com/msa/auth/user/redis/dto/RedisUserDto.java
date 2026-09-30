@@ -18,8 +18,9 @@ import java.util.List;
 public class RedisUserDto implements Serializable{
 	private Integer userSeq;
 	private Integer addressSeq;
-	private String roleSeq;
+	private Integer roleSeq;
 	
+	private String id;
 	private String name;
 	private Integer Status;
 	
