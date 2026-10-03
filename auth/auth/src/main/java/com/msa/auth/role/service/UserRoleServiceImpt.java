@@ -1,11 +1,14 @@
-package com.msa.auth.user.service;
+package com.msa.auth.role.service;
 
+import com.msa.auth.common.exception.code.BusinessExceptionErrorCode;
+import com.msa.auth.common.exception.error.BusinessException;
+import com.msa.auth.role.dto.UserRoleDto;
+import com.msa.auth.role.entity.UserRoleEntity;
+import com.msa.auth.role.entity.UserRoleEntityKey;
+import com.msa.auth.role.repository.UserRoleRepository;
 import com.msa.auth.user.dto.UserDto;
-import com.msa.auth.user.dto.UserRoleDto;
-import com.msa.auth.user.entity.UserRoleEntity;
-import com.msa.auth.user.entity.UserRoleEntityKey;
 import com.msa.auth.user.repository.UserRepository;
-import com.msa.auth.user.repository.UserRoleRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,32 +24,34 @@ public class UserRoleServiceImpt {
 
     @Transactional(rollbackFor = { Exception.class })
     public UserRoleEntity add(UserRoleDto userRoleDto){
+        try{
         return userRoleRepository.save(UserRoleEntity.builder()
-                .userSeq(userRoleDto.getUserSeq())
-                .roleSeq(userRoleDto.getRoleSeq())
-                .build());
+                                                        .userSeq(userRoleDto.getUserSeq())
+                                                        .roleSeq(userRoleDto.getRoleSeq())
+                                                        .build());
+        }catch (Exception e){
+            throw new BusinessException(BusinessExceptionErrorCode.INTERNAL_SERVER_ERROR,"User Role Add Failed");
+        }
     }
 
     @Transactional(rollbackFor = { Exception.class })
-    public Boolean delete(UserRoleDto userRoleDto){
+    public void delete(UserRoleDto userRoleDto){
         try {
             userRoleRepository.deleteById(UserRoleEntityKey.builder()
                     .userSeq(userRoleDto.getUserSeq())
                     .roleSeq(userRoleDto.getRoleSeq())
                     .build());
-            return true;
         }catch(Exception e) {
-            return false;
+            throw new BusinessException(BusinessExceptionErrorCode.INTERNAL_SERVER_ERROR,"User Role Delete Failed");
         }
     }
 
     @Transactional(rollbackFor = { Exception.class })
-    public Boolean deleteRoleByUserIdAndRoleSeq(String userId, Integer roleSeq){
+    public void deleteRoleByUserIdAndRoleSeq(String userId, Integer roleSeq){
         try {
             userRoleRepository.deleteByUserIdAndRoleSeq(userId, roleSeq);
-            return true;
         }catch(Exception e) {
-            return false;
+            throw new BusinessException(BusinessExceptionErrorCode.INTERNAL_SERVER_ERROR,"User Role Delete Failed");
         }
     }
 

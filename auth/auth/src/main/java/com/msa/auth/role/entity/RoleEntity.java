@@ -1,4 +1,4 @@
-package com.msa.auth.user.entity;
+package com.msa.auth.role.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

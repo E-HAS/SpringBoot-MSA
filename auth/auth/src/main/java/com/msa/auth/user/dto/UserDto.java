@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class UserDto {
 
     private Integer addressSeq;
     private Integer roleSeq;
+
+    private LocalDateTime passwordUpdatedDate;
+    private LocalDateTime registeredDate;
+    private LocalDateTime updatedDate;
+    private LocalDateTime deletedDate;
 
     @Transient
     @Builder.Default
@@ -46,6 +52,10 @@ public class UserDto {
                             .id(id)
                             .name(this.getName())
                             .Status(this.getStatus())
+                            .passwordUpdatedDate(this.getPasswordUpdatedDate())
+                            .registeredDate(this.getRegisteredDate())
+                            .updatedDate(this.getUpdatedDate())
+                            .deletedDate(this.getDeletedDate())
                             .build();
     }
 }

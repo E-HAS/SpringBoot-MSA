@@ -3,12 +3,12 @@ package com.msa.auth.user.service;
 import com.msa.auth.common.exception.code.BusinessExceptionErrorCode;
 import com.msa.auth.common.exception.error.BusinessException;
 import com.msa.auth.common.utill.validation;
+import com.msa.auth.role.dto.UserRoleDto;
+import com.msa.auth.role.entity.UserRoleEntity;
+import com.msa.auth.role.service.UserRoleServiceImpt;
 import com.msa.auth.user.converter.UserStatus;
 import com.msa.auth.user.dto.UserDto;
-import com.msa.auth.user.dto.UserRoleDto;
 import com.msa.auth.user.entity.UserEntity;
-import com.msa.auth.user.entity.UserRoleEntity;
-import com.msa.auth.user.redis.dto.RedisUserDto;
 import com.msa.auth.user.redis.service.UserRedisSerivceImpt;
 import com.msa.auth.user.repository.UserRepository;
 import com.msa.auth.user.specification.UserSpecifications;
@@ -152,10 +152,8 @@ public class UserServiceImpt {
             throw new BusinessException(BusinessExceptionErrorCode.NOT_FOUND,"User not found.");
         }
 
-        if(!userRedisSerivceImpt.exists(id)) {
-            userRedisSerivceImpt.save(id, entity.convertRedisUserDto(id));
-        }
-
+        userRedisSerivceImpt.save(id, entity.convertRedisUserDto(id));
+        
         return entity;
     }
 

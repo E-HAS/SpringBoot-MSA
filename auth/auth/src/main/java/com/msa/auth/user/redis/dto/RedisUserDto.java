@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,12 @@ public class RedisUserDto implements Serializable{
 	private String name;
 	private Integer Status;
 	
+
+	private LocalDateTime passwordUpdatedDate;
+    private LocalDateTime registeredDate;
+    private LocalDateTime updatedDate;
+    private LocalDateTime deletedDate;
+
 	@Builder.Default
 	private List<String> roles = new ArrayList<String>();
 	
@@ -35,6 +42,10 @@ public class RedisUserDto implements Serializable{
     				  .name(this.getName())
     				  .status(this.getStatus())
     				  .roles(this.getRoles())
+					  .passwordUpdatedDate(this.getPasswordUpdatedDate())
+					  .registeredDate(this.getRegisteredDate())
+					  .updatedDate(this.getUpdatedDate())
+					  .deletedDate(this.getDeletedDate())
     				  .build();
     }
 }

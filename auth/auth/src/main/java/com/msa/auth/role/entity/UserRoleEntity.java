@@ -1,7 +1,9 @@
-package com.msa.auth.user.entity;
+package com.msa.auth.role.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.msa.auth.user.entity.UserEntity;
+
 import jakarta.persistence.*;
 import lombok.*;
 

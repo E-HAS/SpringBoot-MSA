@@ -1,4 +1,4 @@
-package com.msa.auth.user.dto;
+package com.msa.auth.role.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,8 @@
-package com.msa.auth.user.repository;
+package com.msa.auth.role.repository;
 
-import com.msa.auth.user.entity.UserRoleEntity;
-import com.msa.auth.user.entity.UserRoleEntityKey;
+import com.msa.auth.role.entity.UserRoleEntity;
+import com.msa.auth.role.entity.UserRoleEntityKey;
+
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

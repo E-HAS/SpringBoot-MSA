@@ -4,6 +4,9 @@ import com.msa.auth.address.dto.AddressDto;
 import com.msa.auth.address.entity.AddressEntity;
 import com.msa.auth.address.service.AddressServiceImpt;
 import com.msa.auth.common.dto.ResponseDto;
+import com.msa.auth.common.exception.code.BusinessExceptionErrorCode;
+import com.msa.auth.common.exception.error.BusinessException;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,40 +29,35 @@ public class AddressController {
 	private final AddressServiceImpt addressServiceImpt;
 	@GetMapping
 	public ResponseEntity<ResponseDto> getAddressAll(@PageableDefault(size = 15) Pageable pageable){
-		try {
-			Page<AddressDto> lists = addressServiceImpt.findAll(AddressDto.builder().build(), pageable);
-			
-			return ResponseEntity.status(HttpStatus.OK)
+		Page<AddressDto> lists = addressServiceImpt.findAll(AddressDto.builder().build(), pageable);
+
+		if(lists.isEmpty()){
+		 	throw new BusinessException(BusinessExceptionErrorCode.NOT_FOUND,"Address Not Found");
+		}
+
+		return ResponseEntity.status(HttpStatus.OK)
 					.body(ResponseDto.builder()
 					.status(HttpStatus.OK.value())
 					.message(HttpStatus.OK.getReasonPhrase())
 					.data(Map.of("address", lists))
 					.build());
-		}catch(Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(ResponseDto.builder()
-					.status(HttpStatus.BAD_REQUEST.value())
-					.message(e.getMessage())
-					.build());
-		}
+
 	}
 	
 	@GetMapping(path="/{addressSeq}")
 	public ResponseEntity<ResponseDto> getAddress(@PathVariable ("addressSeq") Integer addressSeq){
-		try {
-			AddressEntity findEntity = addressServiceImpt.findBySeq(AddressDto.builder().seq(addressSeq).build());
-			return ResponseEntity.status(HttpStatus.OK)
+
+		AddressEntity findEntity = addressServiceImpt.findBySeq(AddressDto.builder().seq(addressSeq).build());
+		if(findEntity ==null){
+			throw new BusinessException(BusinessExceptionErrorCode.NOT_FOUND,"Address Not Found");
+		}
+
+		return ResponseEntity.status(HttpStatus.OK)
 								.body(ResponseDto.builder()
 								.status(HttpStatus.OK.value())
 								.message(HttpStatus.OK.getReasonPhrase())
 								.data(Map.of("address", findEntity))
 								.build());
-		}catch(Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(ResponseDto.builder()
-					.status(HttpStatus.BAD_REQUEST.value())
-					.message(e.getMessage())
-					.build());
-		}
+		
 	}
 }

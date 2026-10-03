@@ -1,11 +1,12 @@
-package com.msa.auth.user.repository;
+package com.msa.auth.role.repository;
 
-import com.msa.auth.user.entity.RoleEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.msa.auth.role.entity.RoleEntity;
 
 public interface RoleRepository extends JpaRepository<RoleEntity, Integer>{
     @Transactional

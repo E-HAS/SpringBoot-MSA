@@ -3,6 +3,8 @@ package com.msa.auth.user.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.msa.auth.role.entity.RoleEntity;
+import com.msa.auth.role.entity.UserRoleEntity;
 import com.msa.auth.user.converter.UserStatus;
 import com.msa.auth.user.dto.UserDto;
 import com.msa.auth.user.redis.dto.RedisUserDto;

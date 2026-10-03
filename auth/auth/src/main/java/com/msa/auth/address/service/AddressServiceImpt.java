@@ -22,7 +22,6 @@ import java.util.List;
 public class AddressServiceImpt {
 
 	private final JPAQueryFactory queryFactory;
-
 	@Transactional
 	public Page<AddressDto> findAll(AddressDto addressDto, Pageable pageable){
 		List<AddressDto> Addresses = queryFactory
