@@ -10,12 +10,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AddressDto {
-    private Integer seq;
+    private long addressCode;
     private String addressName;
     
     private Integer sidoCode;
-    private Integer gugunCode;
-    private Integer dongCode;
-    private Integer riCode;
+    private String sidoNm;
+    
+    private Integer sigugunCode;
+    private String sigugunNm;
+
+    private Integer eupmyeondongCode;
+    private String eupmyeondongNm;
+
+    private Integer status;
     
 }

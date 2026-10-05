@@ -28,7 +28,9 @@ spec:
       containers:
       - name: mysql-container
         image: mysql:8.0
-        args: ["--lower_case_table_names=1"]
+        args:
+          - "--lower_case_table_names=1"
+          - "--local-infile=1"
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: "rootpassword"

@@ -26,18 +26,18 @@ public class AddressServiceImpt {
 	public Page<AddressDto> findAll(AddressDto addressDto, Pageable pageable){
 		List<AddressDto> Addresses = queryFactory
 								            .select(Projections.fields(AddressDto.class
-								            		,QAddressEntity.addressEntity.seq
+								            		,QAddressEntity.addressEntity.addressCode
 								            		,QAddressEntity.addressEntity.addressName
 								            		,QAddressEntity.addressEntity.sidoCode
-								            		,QAddressEntity.addressEntity.gugunCode
-								            		,QAddressEntity.addressEntity.dongCode
-								            		,QAddressEntity.addressEntity.riCode
+								            		,QAddressEntity.addressEntity.sigugunCode
+								            		,QAddressEntity.addressEntity.eupmyeondongCode
+								            		,QAddressEntity.addressEntity.eupmyeondongNm
 								                ))
 								             .from(QAddressEntity.addressEntity)
 								             .where(getDefaultWheres(addressDto))
 								             .offset(pageable.getOffset())
 								             .limit(pageable.getPageSize())
-								             .orderBy(QAddressEntity.addressEntity.seq.asc())
+								             .orderBy(QAddressEntity.addressEntity.addressCode.asc())
 								             .fetch();
 		
 		long total = queryFactory.select(QAddressEntity.addressEntity.count())
@@ -51,12 +51,12 @@ public class AddressServiceImpt {
 	public AddressEntity findBySeq(AddressDto addressDto){
 		return queryFactory
 	            .select(Projections.fields(AddressEntity.class
-	            		,QAddressEntity.addressEntity.seq
-	            		,QAddressEntity.addressEntity.addressName
-	            		,QAddressEntity.addressEntity.sidoCode
-	            		,QAddressEntity.addressEntity.gugunCode
-	            		,QAddressEntity.addressEntity.dongCode
-	            		,QAddressEntity.addressEntity.riCode
+	            		,QAddressEntity.addressEntity.addressCode
+						,QAddressEntity.addressEntity.addressName
+						,QAddressEntity.addressEntity.sidoCode
+						,QAddressEntity.addressEntity.sigugunCode
+						,QAddressEntity.addressEntity.eupmyeondongCode
+						,QAddressEntity.addressEntity.eupmyeondongNm
 	                ))
 	             .from(QAddressEntity.addressEntity)
 	             .where(getDefaultWheres(addressDto))
@@ -65,23 +65,23 @@ public class AddressServiceImpt {
 	
 	private BooleanBuilder getDefaultWheres(AddressDto addressDto) {
 		BooleanBuilder wheres = new BooleanBuilder();
-		if (addressDto.getSeq() != null) {
-	    	wheres.and(QAddressEntity.addressEntity.seq.eq(addressDto.getSeq()));
+		if (addressDto.getAddressCode() != 0) {
+	    	wheres.and(QAddressEntity.addressEntity.addressCode.eq(addressDto.getAddressCode()));
 	    }
 		if (addressDto.getAddressName() != null) {
-	    	wheres.and(QAddressEntity.addressEntity.addressName.eq(addressDto.getAddressName()));
+	    	wheres.and(QAddressEntity.addressEntity.addressName.startsWith(addressDto.getAddressName()));
 	    }
 		if (addressDto.getSidoCode() != null) {
 	    	wheres.and(QAddressEntity.addressEntity.sidoCode.eq(addressDto.getSidoCode()));
 	    }
-		if (addressDto.getGugunCode() != null) {
-	    	wheres.and(QAddressEntity.addressEntity.gugunCode.eq(addressDto.getGugunCode()));
+		if (addressDto.getSigugunCode() != null) {
+	    	wheres.and(QAddressEntity.addressEntity.sigugunCode.eq(addressDto.getSigugunCode()));
 	    }
-		if (addressDto.getDongCode() != null) {
-	    	wheres.and(QAddressEntity.addressEntity.dongCode.eq(addressDto.getDongCode()));
+		if (addressDto.getEupmyeondongCode() != null) {
+	    	wheres.and(QAddressEntity.addressEntity.eupmyeondongCode.eq(addressDto.getEupmyeondongCode()));
 	    }
-		if (addressDto.getRiCode() != null) {
-	    	wheres.and(QAddressEntity.addressEntity.riCode.eq(addressDto.getRiCode()));
+		if (addressDto.getEupmyeondongNm() != null) {
+	    	wheres.and(QAddressEntity.addressEntity.eupmyeondongNm.startsWith(addressDto.getEupmyeondongNm()));
 	    }
 		
 		return wheres;

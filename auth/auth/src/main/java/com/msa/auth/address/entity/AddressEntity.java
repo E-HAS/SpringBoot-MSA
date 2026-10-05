@@ -16,12 +16,17 @@ import lombok.NoArgsConstructor;
 @Table(name ="address")
 public class AddressEntity {
     @Id
-    private Integer seq;
+    private long addressCode;
     private String addressName;
     
     private Integer sidoCode;
-    private Integer gugunCode;
-    private Integer dongCode;
-    private Integer riCode;
+    private String sidoNm;
     
+    private Integer sigugunCode;
+    private String sigugunNm;
+
+    private Integer eupmyeondongCode;
+    private String eupmyeondongNm;
+
+    private Integer status;
 }

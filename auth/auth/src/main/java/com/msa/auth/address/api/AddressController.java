@@ -47,7 +47,7 @@ public class AddressController {
 	@GetMapping(path="/{addressSeq}")
 	public ResponseEntity<ResponseDto> getAddress(@PathVariable ("addressSeq") Integer addressSeq){
 
-		AddressEntity findEntity = addressServiceImpt.findBySeq(AddressDto.builder().seq(addressSeq).build());
+		AddressEntity findEntity = addressServiceImpt.findBySeq(AddressDto.builder().addressCode(addressSeq).build());
 		if(findEntity ==null){
 			throw new BusinessException(BusinessExceptionErrorCode.NOT_FOUND,"Address Not Found");
 		}
