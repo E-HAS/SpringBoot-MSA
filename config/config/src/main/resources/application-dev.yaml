@@ -1,10 +1,5 @@
 server:
   port: 8888
-  ssl:
-    enabled: true
-    key-store: C:\\ssl\\server.p12
-    key-store-password: QWas!@34
-    key-store-type: PKCS12
 
 spring:
   application:

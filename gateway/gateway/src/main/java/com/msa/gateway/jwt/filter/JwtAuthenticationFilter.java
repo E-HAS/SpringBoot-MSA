@@ -46,22 +46,26 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
 
             return jwtTokenValidService.resolveAccessToken(request)
                     .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No Authorization header or Invalid format")))
+                    //.checkpoint("JWT-1 resolveAccessToken")
                     .flatMap(jwt ->
                             jwtTokenValidService.validateAccessToken(jwt) // AccessToken 블랙리스트 조회
+                                    //.checkpoint("JWT-2 validateAccessToken(blacklist)")
                                     .then(jwtTokenValidService.validateTokenAndGetClaims(jwt)) // 토큰 추출
-                                    .onErrorMap(e -> new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Invalid or Expired Access token: " + e.getMessage(),e))
-                    )
+                                    //.checkpoint("JWT-3 validateTokenAndGetClaims"))
+                                    .onErrorMap(e -> { log.error("filter validate error: {}", e.getMessage(), e);
+                                            return new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Invalid or Expired Access token: " + e.getMessage(),e);
+                                    })
                     .map(Claims::getSubject)
-                    // 헤더 추가
-                    .flatMap(userId -> {
-                        ServerHttpRequest modifiedRequest = request.mutate()
-                                .header("X-User-Id", userId)
-                                .build();
-                        // 라우팅 전송
+                    .flatMap(userId -> { // 헤더 추가, 라우팅 전송
+                        ServerHttpRequest modifiedRequest = request.mutate().header("X-User-Id", userId).build();
                         return chain.filter(exchange.mutate().request(modifiedRequest).build());
                     })
                     // AccessToken, RefreshToken, Redis 조회 등 모든 에러 401 반환
-                    .onErrorResume(e -> onError(exchange, e.getMessage(), HttpStatus.UNAUTHORIZED));
+                    .onErrorResume(e -> {
+                        log.error("filter error resume: {}", e.getMessage(), e);
+                        String reason = (e instanceof ResponseStatusException r && r.getReason() != null)? r.getReason() : e.getMessage();
+                        return onError(exchange, reason, HttpStatus.UNAUTHORIZED);
+                    });
         };
     }
     // 에외 경로 처리

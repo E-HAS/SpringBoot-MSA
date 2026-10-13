@@ -1,0 +1,69 @@
+server:
+  port: 8001
+  shutdown: graceful          # K8s 롤링 업데이트 시 처리 중인 요청 마무리
+
+spring:
+  application:
+    name: gatewayservice
+  main:
+    web-application-type: reactive
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:30379}
+      password: ${REDIS_PASSWORD}
+      timeout: 2s
+      connect-timeout: 2s
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 10s
+      default-filters:
+        - name : GlobalFilter
+          args :
+            baseMessage : Spring Cloud Gateway Global Filter
+            preLogger   : true
+            postLogger  : true
+      routes:
+        - id : authservice
+          #uri: http://authservice-service:8080
+          uri : ${AUTH_SERVICE_URI:https://127.0.0.1:443}
+          predicates :
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*), /$\{segment}
+            - name : JwtAuthenticationFilter
+              args :
+                excludePaths :
+                  - POST:/login/*
+                  - POST:/users
+                  - GET:/address
+                  - GET:/address/*
+                  - POST:/jwt/reissue
+jwt:
+  header : Authorization #X-AUTH-TOKEN
+  secretkey : ${JWT_SECRET} 
+  access-Token-expiration : 3600000    # 60 * 60 * 1000L ( 1시간 )
+  refresh-token-expiration : 604800000 #7 * 24 * 60 * 60 * 1000L ( 7일 )
+
+
+logging:
+  level:
+    com.msa.gateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+
+management:                   
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never

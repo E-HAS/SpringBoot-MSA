@@ -11,6 +11,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 
 import com.msa.gateway.jwt.base.JwtTokenValidBase;
@@ -18,6 +19,7 @@ import com.msa.gateway.jwt.base.JwtTokenValidBase;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 @Slf4j
@@ -38,24 +40,29 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<GlobalFilter.Conf
             ServerHttpRequest request = exchange.getRequest();
             String id = request.getId();
 
-            // 다운스트림 서비스(authservice 등)까지 동일한 requestId를 전파
-            // -> 게이트웨이~서비스 로그를 하나의 id로 grep해서 추적 가능
-            ServerHttpRequest mutatedRequest = request.mutate()
+            // 헤더에 ID 추가
+            ServerHttpRequest httpRequest = request.mutate()
                     .header(REQUEST_ID_HEADER, id)
                     .build();
-            ServerWebExchange mutatedExchange = exchange.mutate().request(mutatedRequest).build();
-            ServerHttpResponse response = mutatedExchange.getResponse();
+            ServerWebExchange webExchange = exchange.mutate().request(httpRequest).build();
+            ServerHttpResponse response = webExchange.getResponse();
 
             log.info("[Filter-{}] baseMessage : {}", id, config.getBaseMessage());
 
             if (config.isPreLogger()) {
-                logRequest(mutatedRequest, id);
+                logRequest(httpRequest, id);
             }
 
             long startTime = System.currentTimeMillis();
 
-            return chain.filter(mutatedExchange)
-                    .doOnError(e -> log.error("[Request-{}] Filter chain error: {}", id, e.getMessage(), e))
+            return chain.filter(webExchange)
+                    .doOnError(e -> {
+                        if(e instanceof ResponseStatusException ex){
+                            log.error("[Request-{}] Filter chain error status: {}, message: {}", id, ex.getStatusCode().value(), ex.getReason());
+                        }else{
+                            log.error("[Request-{}] Filter chain error: {}", id, e.getMessage(), e);
+                        }
+                    })
                     .then(Mono.fromRunnable(() -> {
                         if (config.isPostLogger()) {
                             long duration = System.currentTimeMillis() - startTime;

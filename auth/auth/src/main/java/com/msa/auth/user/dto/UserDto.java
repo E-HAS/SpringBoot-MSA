@@ -37,10 +37,14 @@ public class UserDto {
     @Builder.Default
     private List<String> roles = new ArrayList<String>();
 
-    public interface UserData {
-        String getSeq();
-        String getName();
-        String getAddressSeq();
+    public UserDto( Integer seq,
+                    String name,
+                    Integer status,
+                    Integer addressSeq){
+        this.seq = seq;
+        this.name = name;
+        this.status = status;
+        this.addressSeq = addressSeq;
     }
 
     public RedisUserDto convertRedisUserDto(String id) {

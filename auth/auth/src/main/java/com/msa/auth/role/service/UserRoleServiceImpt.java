@@ -51,6 +51,7 @@ public class UserRoleServiceImpt {
         try {
             userRoleRepository.deleteByUserIdAndRoleSeq(userId, roleSeq);
         }catch(Exception e) {
+            log.warn("User Role Delete Failed : userId={}, roleSeq={}",userId, roleSeq, e);
             throw new BusinessException(BusinessExceptionErrorCode.INTERNAL_SERVER_ERROR,"User Role Delete Failed");
         }
     }

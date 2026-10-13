@@ -32,7 +32,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponseDto> handleAllIllegalArgumentException(Exception e) {
         String errorDetail = extractErrorDetail(e);
-        log.error("[handleAllIllegalArgumentException]", e);
         log.error(errorDetail, e);
 
         ErrorResponseDto response = new ErrorResponseDto(
@@ -46,12 +45,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<String> handleBusinessException(BusinessException e) {
+    public ResponseEntity<ErrorResponseDto> handleBusinessException(BusinessException e) {
         String errorDetail = extractErrorDetail(e);
-        log.error("[handleBusinessException]", e);
         log.error(errorDetail, e);
 
-        return ResponseEntity.status(e.getErrorCode().getStatus()).body(e.getErrorCode().getMessage());
+        ErrorResponseDto response = new ErrorResponseDto(
+                LocalDateTime.now(),
+                e.getErrorCode().getStatus().value(),
+                e.getErrorCode().getMessage(),
+                e.getMessage()
+        );
+        
+        return new ResponseEntity<>(response, e.getErrorCode().getStatus());
     }
     
     private String extractErrorDetail(Exception e) {

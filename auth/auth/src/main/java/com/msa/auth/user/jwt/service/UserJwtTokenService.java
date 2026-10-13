@@ -1,6 +1,7 @@
 package com.msa.auth.user.jwt.service;
 
 import com.msa.auth.common.jwt.dto.JwtToken;
+import com.msa.auth.user.entity.UserDetail;
 import com.msa.auth.user.jwt.provider.UserJwtTokenProvider;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,7 +30,10 @@ public class UserJwtTokenService{
     	JwtToken accessToken = userJwtTokenProvider.createAccessToken(authentication);
     	JwtToken refreshToken = userJwtTokenProvider.createRefreshToken(authentication);
     	
-    	Boolean created = userJwtTokenProvider.addRefreshTokenInRedis( refreshToken.getRefreshToken());
+        UserDetail userDetail = (UserDetail) authentication.getPrincipal();
+        String userRefreshTokenKey = userDetail.getId() + "-" + refreshToken.getRefreshToken();
+
+    	Boolean created = userJwtTokenProvider.addRefreshTokenInRedis(userRefreshTokenKey);
 
     	if(!created) {
     		throw new IllegalStateException("Failed to store tokens in Redis");

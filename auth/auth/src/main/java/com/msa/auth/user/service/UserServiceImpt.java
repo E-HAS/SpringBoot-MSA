@@ -87,7 +87,7 @@ public class UserServiceImpt {
         int dbResult = userRepository.updateBySeq(entity.getSeq()
                                                     ,entity.getName()
                                                     ,entity.getPassword()
-                                                    ,entity.getStatus()
+                                                    ,entity.getStatus().getInteger()
                                                     ,entity.getAddressSeq()
                                                     ,entity.getPasswordUpdatedDate()
                                                     ,entity.getUpdatedDate()

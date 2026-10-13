@@ -10,69 +10,69 @@ public enum BusinessExceptionErrorCode {
 
     BAD_REQUEST(
             HttpStatus.BAD_REQUEST,
-            "Bad request."
+            "Bad request"
     ),
 
     UNAUTHORIZED(
             HttpStatus.UNAUTHORIZED,
-            "Authentication is required."
+            "Authentication is required"
     ),
 
     FORBIDDEN(
             HttpStatus.FORBIDDEN,
-            "Access is forbidden."
+            "Access is forbidden"
     ),
 
     NOT_FOUND(
             HttpStatus.NOT_FOUND,
-            "Resource not found."
+            "Resource not found"
     ),
 
     NOT_ACCEPTABLE(
             HttpStatus.NOT_ACCEPTABLE,
-            "The requested resource cannot provide an acceptable response."
+            "The requested resource cannot provide an acceptable response"
     ),
 
     REQUEST_TIMEOUT(
             HttpStatus.REQUEST_TIMEOUT,
-            "The request timed out."
+            "The request timed out"
     ),
 
     CONFLICT(
             HttpStatus.CONFLICT,
-            "The request conflicts with the current state of the resource."
+            "The request conflicts with the current state of the resource"
     ),
 
     PAYLOAD_TOO_LARGE(
             HttpStatus.PAYLOAD_TOO_LARGE,
-            "The request payload is too large."
+            "The request payload is too large"
     ),
 
     // 5xx Server Error
 
     INTERNAL_SERVER_ERROR(
             HttpStatus.INTERNAL_SERVER_ERROR,
-            "An internal server error occurred."
+            "An internal server error occurred"
     ),
 
     NOT_IMPLEMENTED(
             HttpStatus.NOT_IMPLEMENTED,
-            "The requested functionality is not implemented."
+            "The requested functionality is not implemented"
     ),
 
     BAD_GATEWAY(
             HttpStatus.BAD_GATEWAY,
-            "The server received an invalid response from an upstream server."
+            "The server received an invalid response from an upstream server"
     ),
 
     SERVICE_UNAVAILABLE(
             HttpStatus.SERVICE_UNAVAILABLE,
-            "The service is temporarily unavailable."
+            "The service is temporarily unavailable"
     ),
 
     GATEWAY_TIMEOUT(
             HttpStatus.GATEWAY_TIMEOUT,
-            "The upstream server did not respond in time."
+            "The upstream server did not respond in time"
     );
 
     private final HttpStatus status;

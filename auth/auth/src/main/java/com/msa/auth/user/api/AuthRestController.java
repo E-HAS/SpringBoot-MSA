@@ -59,7 +59,7 @@ public class AuthRestController {
         Cookie cookie = new Cookie("refreshToken", token.getRefreshToken());
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
-        cookie.setPath("/");
+        cookie.setPath("/auth/jwt/reissue");
         cookie.setMaxAge((int) Duration.ofDays(userJwtTokenService.getRefreshTokenexpirationTime()).getSeconds());
         // SameSite 속성은 Servlet API가 지원하지 않으면 별도 설정 필요 (생략 가능)
         response.addCookie(cookie);
@@ -78,15 +78,15 @@ public class AuthRestController {
 
         //2. Redis <- RefreshToken 제거
         boolean deleted = jwtRedisSerivceImpt.deleteRefreshToken(refreshToken);
-        if(!deleted){
-            throw new IllegalStateException("Refresh Token Not Found In Cookies.");
-        }
+        //if(!deleted){
+        //    throw new IllegalStateException("Refresh Token Not Found In Cookies.");
+        //}
 
         //3. Secure Cookie에서 RefreshToken 만료
         Cookie deleteCookie = new Cookie("refreshToken", "");
         deleteCookie.setHttpOnly(true);
         deleteCookie.setSecure(true);
-        deleteCookie.setPath("/");
+        deleteCookie.setPath("/auth/jwt/reissue");
         deleteCookie.setMaxAge(0); // 즉시 만료
         // SameSite 설정은 Servlet API 4.0 이상 또는 별도 필터 필요 (생략 가능)
         response.addCookie(deleteCookie);

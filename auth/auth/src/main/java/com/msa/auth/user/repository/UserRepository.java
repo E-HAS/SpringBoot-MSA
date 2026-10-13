@@ -63,7 +63,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>, JpaS
             @Param("seq") Integer seq,
             @Param("name") String name,
             @Param("password") String password,
-            @Param("status") UserStatus status,
+            @Param("status") Integer status,
             @Param("addressSeq") Integer addressSeq,
             @Param("passwordUpdatedDate") LocalDateTime passwordUpdatedDate,
             @Param("updatedDate") LocalDateTime updatedDate,

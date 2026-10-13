@@ -73,10 +73,7 @@ public class UserJwtTokenProvider extends JwtTokenBase {
 
     // AccessToken -> Authentication 생성 ( 인증된 사용자로 처리 )
     public Authentication getAuthentication(String token) {
-        Claims claims = Jwts.parser()
-                .verifyWith(secretKey).build()
-                .parseSignedClaims(token).getPayload();
-
+        Claims claims = this.getPayloadToken(token);
         /*
         Object authoritiesClaim = claims.get(PERMISSIONS_KEY);
         Collection<? extends GrantedAuthority> authorities = authoritiesClaim == null ? AuthorityUtils.NO_AUTHORITIES
@@ -113,6 +110,7 @@ public class UserJwtTokenProvider extends JwtTokenBase {
                 .subject(userDetail.getId())
                 .add(PERMISSIONS_KEY, permissions)
                 .add(TOKEN_ID_KEY, accessTokenId)
+                .add("id",userDetail.getId())
                 .add("name", userDetail.getName())
                 .add("address", userDetail.getAddressSeq())
                 .build();
@@ -142,7 +140,7 @@ public class UserJwtTokenProvider extends JwtTokenBase {
         Claims claims = Jwts.claims()
                 .subject(userDetail.getId())
                 .add(TOKEN_ID_KEY, refresTokenId)
-                .add("name", userDetail.getName())
+                .add("id",userDetail.getId())
                 .build();
 
         Date now = new Date();
@@ -189,7 +187,6 @@ public class UserJwtTokenProvider extends JwtTokenBase {
     public void validdateRefreshToken(HttpServletRequest request, HttpServletResponse response){
         // RefreshToken 추출
         String refreshToken = this.extractRefreshToken( request);
-
         if(refreshToken == null || refreshToken.isEmpty()){
             throw new IllegalArgumentException("Refresh token not found in Cookies");
         }
@@ -198,8 +195,10 @@ public class UserJwtTokenProvider extends JwtTokenBase {
             throw new IllegalArgumentException("Invalid or expired refresh token");
         }
 
+        String userId = this.getPayloadToken(refreshToken).get("id", String.class);
+        String userRefreshTokenKey = userId + "-" + refreshToken;
         // Redis에 존재하는지 확인
-        if (!jwtRedisSerivceImpt.existsRefreshToken(refreshToken)) {
+        if (!jwtRedisSerivceImpt.existsRefreshToken(userRefreshTokenKey)) {
             throw new IllegalArgumentException("Refresh token not found");
         }
     }
@@ -207,7 +206,7 @@ public class UserJwtTokenProvider extends JwtTokenBase {
         // Header에서 AccessToken 추출
         String accessToken = this.resolveAccessToken(request);
         if(accessToken == null || accessToken.isEmpty()){
-            throw new IllegalArgumentException("Refresh token not found in Authorization header");
+            throw new IllegalArgumentException("access token not found in Authorization header");
         }
         // AccessToken 재생성
         String recreatedAccessToken = this.extendAccessToken(accessToken);
