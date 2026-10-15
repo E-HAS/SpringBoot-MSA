@@ -53,15 +53,15 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
                                     .then(jwtTokenValidService.validateTokenAndGetClaims(jwt)) // 토큰 추출
                                     //.checkpoint("JWT-3 validateTokenAndGetClaims"))
                                     .onErrorMap(e -> { log.error("filter validate error: {}", e.getMessage(), e);
-                                            return new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Invalid or Expired Access token: " + e.getMessage(),e);
+                                                        return new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Invalid or Expired Access token: " + e.getMessage(),e);
                                     })
+                            )
                     .map(Claims::getSubject)
                     .flatMap(userId -> { // 헤더 추가, 라우팅 전송
                         ServerHttpRequest modifiedRequest = request.mutate().header("X-User-Id", userId).build();
                         return chain.filter(exchange.mutate().request(modifiedRequest).build());
                     })
-                    // AccessToken, RefreshToken, Redis 조회 등 모든 에러 401 반환
-                    .onErrorResume(e -> {
+                    .onErrorResume(e -> { // AccessToken, RefreshToken, Redis 조회 등 모든 에러 401 반환
                         log.error("filter error resume: {}", e.getMessage(), e);
                         String reason = (e instanceof ResponseStatusException r && r.getReason() != null)? r.getReason() : e.getMessage();
                         return onError(exchange, reason, HttpStatus.UNAUTHORIZED);
