@@ -63,7 +63,7 @@ jobs:
 
       - name: 3. ${{ matrix.service }} Gradle 빌드
         if: matrix.enabled == 'true'
-        working-directory: ./${{ matrix.service }}
+        working-directory: ./${{ matrix.service }}/${{ matrix.service }}
         run: |
           chmod +x ./gradlew
           ./gradlew clean bootJar -x test
