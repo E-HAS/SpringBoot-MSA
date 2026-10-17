@@ -67,6 +67,12 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew clean bootJar -x test
+          
+      - name: Docker 인증 설정
+        run: |
+          mkdir -p "$RUNNER_TEMP/docker-config"
+          echo '{"auths":{}}' > "$RUNNER_TEMP/docker-config/config.json"
+          echo "DOCKER_CONFIG=$RUNNER_TEMP/docker-config" >> "$GITHUB_ENV"
 
       - name: 4. Docker Hub 로그인
         if: matrix.enabled == 'true'
