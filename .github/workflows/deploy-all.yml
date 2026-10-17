@@ -36,14 +36,17 @@ jobs:
           - service: config
             image_name: config-server
             deploy_name: config-server
+            java_version: '17'
             enabled: ${{ needs.changes.outputs.config }}
           - service: gateway
             image_name: gateway-server
             deploy_name: gateway-server
+            java_version: '17'
             enabled: ${{ needs.changes.outputs.gateway }}
           - service: auth
             image_name: auth-server
             deploy_name: auth-server
+            java_version: '17'
             enabled: ${{ needs.changes.outputs.auth }}
 
     steps:
@@ -51,11 +54,11 @@ jobs:
         if: matrix.enabled == 'true'
         uses: actions/checkout@v4
 
-      - name: 2. JDK 17 설정
+      - name: 2. JDK ${{ matrix.java_version }} 설정
         if: matrix.enabled == 'true'
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: ${{ matrix.java_version }}
           distribution: 'temurin'
 
       - name: 3. ${{ matrix.service }} Gradle 빌드
