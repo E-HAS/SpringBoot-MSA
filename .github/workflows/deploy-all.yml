@@ -80,7 +80,7 @@ jobs:
       - name: 5. Docker 이미지 빌드 및 푸시 (${{ matrix.image_name }})
         if: matrix.enabled == 'true'
         # 중요: Dockerfile과 build/libs 폴더가 있는 경로로 3번 스텝과 통일!
-        working-directory: ./${{ matrix.service }}/
+        working-directory: ./${{ matrix.service }}
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.image_name }}:${{ github.sha }} \
                        -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.image_name }}:latest .
