@@ -3,6 +3,7 @@ name: MSA Auto Build & Deploy to K8s
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   # 1. 어떤 폴더(서버)의 코드가 수정되었는지 감지
@@ -31,6 +32,8 @@ jobs:
     if: ${{ needs.changes.outputs.config == 'true' || needs.changes.outputs.gateway == 'true' || needs.changes.outputs.auth == 'true' }}
     runs-on: self-hosted
     strategy:
+      max-parallel: 1 # 무조건 1개씩 순서대로 실행 (Config 완료 후 -> Gateway 완료 후 -> Auth 실행)
+      fail-fast: true # 앞 단계 실패 시 즉시 중단
       matrix:
         include:
           - service: config
