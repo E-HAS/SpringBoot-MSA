@@ -7,7 +7,7 @@ on:
 jobs:
   # 1. 어떤 폴더(서버)의 코드가 수정되었는지 감지
   changes:
-    runs-on: self-hosted # 맥미니 Self-hosted Runner 사용
+    runs-on: self-hosted
     outputs:
       config: ${{ steps.filter.outputs.config }}
       gateway: ${{ steps.filter.outputs.gateway }}
@@ -67,23 +67,20 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew clean bootJar -x test
-          
-      - name: Docker 인증 설정
-        run: |
-          mkdir -p "$RUNNER_TEMP/docker-config"
-          echo '{"auths":{}}' > "$RUNNER_TEMP/docker-config/config.json"
-          echo "DOCKER_CONFIG=$RUNNER_TEMP/docker-config" >> "$GITHUB_ENV"
 
-      - name: 4. Docker Hub 로그인
+      - name: 4. Docker Hub 로그인 (macOS Keychain 오류 방지 적용)
         if: matrix.enabled == 'true'
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          # ~/.docker/config.json에서 osxkeychain 설정이 있으면 자동 제거 후 로그인
+          if [ -f ~/.docker/config.json ]; then
+            sed -i '' '/"credsStore"/d' ~/.docker/config.json
+          fi
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: 5. Docker 이미지 빌드 및 푸시 (${{ matrix.image_name }})
         if: matrix.enabled == 'true'
-        working-directory: ./${{ matrix.service }}
+        # 중요: Dockerfile과 build/libs 폴더가 있는 경로로 3번 스텝과 통일!
+        working-directory: ./${{ matrix.service }}/${{ matrix.service }}
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.image_name }}:${{ github.sha }} \
                        -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.image_name }}:latest .
